@@ -1,4 +1,4 @@
-﻿namespace Meshtech.Main
+﻿namespace MeshTech.Model
 {
     public class RouteNode
     {

@@ -40,7 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Beacon.cs" />
+    <Compile Include="IO\BeaconFileEnumerator.cs" />
+    <Compile Include="IO\BeaconFileReader.cs" />
+    <Compile Include="IO\BeaconParser.cs" />
+    <Compile Include="IO\IBeaconParser.cs" />
+    <Compile Include="IO\Route.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

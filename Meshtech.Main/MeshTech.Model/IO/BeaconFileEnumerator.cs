@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Meshtech.Main.IO
+namespace MeshTech.Model.IO
 {
     public class BeaconFileEnumerator : IEnumerator<Beacon>
     {

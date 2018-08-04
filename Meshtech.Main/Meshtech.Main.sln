@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meshtech.Main", "Meshtech.Main\Meshtech.Main.csproj", "{07B78BFD-3E31-4293-B55F-3C9575E9E347}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeshTech.Model", "MeshTech.Model\MeshTech.Model.csproj", "{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{07B78BFD-3E31-4293-B55F-3C9575E9E347}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07B78BFD-3E31-4293-B55F-3C9575E9E347}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07B78BFD-3E31-4293-B55F-3C9575E9E347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

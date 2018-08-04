@@ -1,7 +1,7 @@
-﻿using Meshtech.Main.IO;
-using System;
+﻿using System;
+using MeshTech.Model.IO;
 
-namespace Meshtech.Main
+namespace MeshTech.Model
 {
     public class Beacon : ICloneable
     {

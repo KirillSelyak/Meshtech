@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace Meshtech.Main.IO
+namespace MeshTech.Model.IO
 {
     public class Route : ICloneable
     {

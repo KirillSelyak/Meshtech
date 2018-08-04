@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Meshtech.Main.IO
+namespace MeshTech.Model.IO
 {
     public class BeaconParser : IBeaconParser
     {
