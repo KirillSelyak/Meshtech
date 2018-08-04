@@ -2,6 +2,8 @@
 using System.Linq;
 using MeshTech.Model;
 using MeshTech.Model.IO;
+using MeshTech.Model.IO.System;
+using MeshTech.Model.Text;
 
 namespace Meshtech.Main
 {
@@ -53,9 +55,12 @@ namespace Meshtech.Main
             }
         }
 
-        private static BeaconFileReader CreateReader(string path)
+        private static StreamebleBeacons CreateReader(string path)
         {
-            var result = new BeaconFileReader(path, new BeaconParser());
+            var fileStreamFactory = new FileStreamReaderFactory(path);
+            var beaconParser = new BeaconParser();
+            var beaconEnumeratorFactory = new BeaconEnumeratorFactory(beaconParser);
+            var result = new StreamebleBeacons(beaconEnumeratorFactory, fileStreamFactory);
             return result;
         }
 

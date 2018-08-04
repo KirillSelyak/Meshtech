@@ -1,4 +1,4 @@
-﻿namespace MeshTech.Model.IO
+﻿namespace MeshTech.Model.Text
 {
     public interface IBeaconParser
     {
