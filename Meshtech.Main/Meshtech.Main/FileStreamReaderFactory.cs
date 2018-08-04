@@ -1,6 +1,7 @@
 ﻿using System.IO;
+using MeshTech.Model.IO;
 
-namespace MeshTech.Model.IO.System
+namespace Meshtech.Main
 {
     public class FileStreamReaderFactory : IStreamReaderFactory
     {

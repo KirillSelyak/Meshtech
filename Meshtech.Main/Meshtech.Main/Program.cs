@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
 using MeshTech.Model;
 using MeshTech.Model.IO;
-using MeshTech.Model.IO.System;
-using MeshTech.Model.Text;
 
 namespace Meshtech.Main
 {
@@ -11,67 +8,51 @@ namespace Meshtech.Main
     {
         static void Main(string[] args)
         {
-            const string fileName = @"C:\Users\kiril\Desktop\Test\Test\rawio\rawio.log";
-
-            var root = CreateRoot();
-            var reader = CreateReader(fileName);
-
-            foreach (var beacon in reader.Where(o => !string.IsNullOrEmpty(o.MacAddress)))
+            foreach (var fileName in args)
             {
-                var currentNode = root;
-                for (int i = 14; i >= 0; i--)
-                {
-                    var shift = beacon.Route.OctMask[i];
-                    if (shift != 7)
-                    {
-                        for (int j = 0; j <= i; j++)
-                        {
-                            var targetBeacon = (Beacon)currentNode.Beacon.Clone();
-                            var currentValue = beacon.Route.OctMask[j];
-                            targetBeacon.Route.OctMask[j] = currentValue;
-                            targetBeacon.MacAddress = (j == i)
-                                ? beacon.MacAddress
-                                : string.Empty;
-                            currentNode = currentNode.AddOrUpdate(currentValue, targetBeacon);
-                        }
-                        break;
-                    }
-                }
+                PrintInformationHeaderForTree(fileName);
+
+                var fileStreamReader = CreateFileStreamReaderFactory(fileName);
+                var streamebleBeacons = BootStrapper.CreateStreamebleBeacons(fileStreamReader);
+                var treeConstructor = BootStrapper.CreateTreeConstructor();
+                var tree = treeConstructor.Construct(streamebleBeacons);
+                PrintTree(tree);
             }
-            Print(root);
+
+            PrintInformationFooter();
+        }
+
+        private static void PrintInformationFooter()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Press any key to exit ...");
             Console.ReadLine();
         }
 
-        public static void Print(RouteNode currentNode)
+        private static void PrintInformationHeaderForTree(string fileName)
         {
-            Console.WriteLine($"{currentNode.Beacon.Route.StringMask} - {currentNode.Beacon.MacAddress}");
-            for (int i = 0; i < currentNode.ChildRouteNodes.Length - 1; i++)
+            Console.WriteLine($"Tree from log file -'{fileName}':");
+            Console.WriteLine();
+        }
+
+        private static IStreamReaderFactory CreateFileStreamReaderFactory(string path)
+        {
+            var result = new FileStreamReaderFactory(path);
+            return result;
+        }
+
+        private static void PrintTree(RouteNode root)
+        {
+            Console.WriteLine($"{root.Beacon.Route.StringMask} - {root.Beacon.MacAddress}");
+            for (int i = 0; i < root.ChildRouteNodes.Length - 1; i++)
             {
-                var targetNode = currentNode.ChildRouteNodes[i];
-                if (currentNode.ChildRouteNodes[i] != null)
+                var targetNode = root.ChildRouteNodes[i];
+                if (root.ChildRouteNodes[i] != null)
                 {
-                    Print(targetNode);
+                    PrintTree(targetNode);
                 }
             }
         }
 
-        private static StreamebleBeacons CreateReader(string path)
-        {
-            var fileStreamFactory = new FileStreamReaderFactory(path);
-            var beaconParser = new BeaconParser();
-            var beaconEnumeratorFactory = new BeaconEnumeratorFactory(beaconParser);
-            var result = new StreamebleBeacons(beaconEnumeratorFactory, fileStreamFactory);
-            return result;
-        }
-
-        private static RouteNode CreateRoot()
-        {
-            var beacond = new Beacon()
-            {
-                Route = Route.Parse("FFFFFFFFFFF8")
-            };
-            var result = new RouteNode(beacond);
-            return result;
-        }
     }
 }

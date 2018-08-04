@@ -43,12 +43,12 @@
     <Compile Include="Beacon.cs" />
     <Compile Include="IO\StreamableBeaconsEnumerator.cs" />
     <Compile Include="IO\StreamebleBeacons.cs" />
+    <Compile Include="Network\MeshtechTreeConstructor.cs" />
     <Compile Include="Text\BeaconParser.cs" />
     <Compile Include="IO\BeaconEnumeratorFactory.cs" />
     <Compile Include="Text\IBeaconParser.cs" />
     <Compile Include="IO\IBeaconEnumeratorFactory.cs" />
     <Compile Include="IO\IStreamReaderFactory.cs" />
-    <Compile Include="IO\System\FileStreamReaderFactory.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteBuilder.cs" />
