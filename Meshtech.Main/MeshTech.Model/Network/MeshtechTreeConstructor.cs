@@ -18,14 +18,14 @@ namespace MeshTech.Model.Network
                 var currentNode = result;
                 for (int i = 14; i >= 0; i--)
                 {
-                    var shift = beacon.Route.OctMask[i];
+                    var shift = beacon.Route.GetValue(i);
                     if (shift != 7)
                     {
                         for (int j = 0; j <= i; j++)
                         {
-                            var targetBeacon = (Beacon)currentNode.Beacon.Clone();
-                            var currentValue = beacon.Route.OctMask[j];
-                            targetBeacon.Route.OctMask[j] = currentValue;
+                            var targetBeacon = new Beacon();
+                            var currentValue = beacon.Route.GetValue(j);
+                            targetBeacon.Route = currentNode.Beacon.Route.Insert(j, currentValue);
                             targetBeacon.MacAddress = j == i
                                 ? beacon.MacAddress
                                 : string.Empty;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MeshTech.Model
 {
-    public class Route : ICloneable
+    public class Route
     {
         private byte[] octMask;
 
@@ -20,25 +20,28 @@ namespace MeshTech.Model
                 intValue = intValue / 8;
             }
             while (intValue > 0);
-            var result = new Route()
+            var result = new Route
             {
-                OctMask = octMask
+                octMask = octMask
             };
             return result;
         }
 
-        public object Clone()
+        public byte GetValue(int index)
         {
-            var clonedOctMask = (byte[])octMask.Clone();
-            var result = new Route();
-            result.OctMask = clonedOctMask;
+            var result = octMask[index];
             return result;
         }
 
-        public byte[] OctMask
+        public Route Insert(int index, byte value)
         {
-            get { return octMask; }
-            private set { octMask = value; }
+            var clonedOctMask = (byte[])octMask.Clone();
+            var result = new Route
+            {
+                octMask = clonedOctMask
+            };
+            result.octMask[index] = value;
+            return result;
         }
 
         public string StringMask
@@ -52,6 +55,20 @@ namespace MeshTech.Model
                 }
                 var longValue = Convert.ToInt64(builder.ToString(), 8);
                 var result = longValue.ToString("X");
+                return result;
+            }
+        }
+
+        public string StringOctMask
+        {
+            get
+            {
+                var builder = new StringBuilder();
+                foreach (var item in octMask)
+                {
+                    builder.Append(item);
+                }
+                var result = builder.ToString();
                 return result;
             }
         }

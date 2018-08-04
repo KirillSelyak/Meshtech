@@ -43,7 +43,7 @@ namespace Meshtech.Main
 
         private static void PrintTree(RouteNode root)
         {
-            Console.WriteLine($"{root.Beacon.Route.StringMask} - {root.Beacon.MacAddress}");
+            Console.WriteLine($"{root.Beacon.Route.StringOctMask} - {root.Beacon.MacAddress}");
             for (int i = 0; i < root.ChildRouteNodes.Length - 1; i++)
             {
                 var targetNode = root.ChildRouteNodes[i];
