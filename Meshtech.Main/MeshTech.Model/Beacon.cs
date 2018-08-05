@@ -4,7 +4,7 @@
     {
         private static Beacon invalidBeacon = new Beacon();
 
-        public Route Route { get; set; }
+        public OctRoute Route { get; set; }
 
         public string MacAddress { get; set; }
 

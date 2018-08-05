@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meshtech.Main", "Meshtech.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeshTech.Model", "MeshTech.Model\MeshTech.Model.csproj", "{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeshTech.Model.Tests", "MeshTech.Model.Tests\MeshTech.Model.Tests.csproj", "{28DCE99A-5910-469F-8C52-D6CE68241E09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C0366F9-5DB0-4B69-B0BE-D4CAECD1253F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28DCE99A-5910-469F-8C52-D6CE68241E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28DCE99A-5910-469F-8C52-D6CE68241E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28DCE99A-5910-469F-8C52-D6CE68241E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28DCE99A-5910-469F-8C52-D6CE68241E09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

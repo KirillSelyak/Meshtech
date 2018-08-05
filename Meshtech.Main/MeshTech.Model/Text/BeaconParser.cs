@@ -30,10 +30,10 @@ namespace MeshTech.Model.Text
             }
         }
 
-        private Route ParseRoute(string rawRoute)
+        private OctRoute ParseRoute(string rawRoute)
         {
             var number = rawRoute.Substring(3);
-            var route = Route.Parse(number);
+            var route = OctRoute.Parse(number);
             return route;
         }
 

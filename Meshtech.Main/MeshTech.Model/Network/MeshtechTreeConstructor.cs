@@ -42,7 +42,7 @@ namespace MeshTech.Model.Network
         {
             var beacond = new Beacon
             {
-                Route = Route.Parse("FFFFFFFFFFF8")
+                Route = OctRoute.Parse("FFFFFFFFFFF8")
             };
             var result = new RouteNode(beacond);
             return result;
