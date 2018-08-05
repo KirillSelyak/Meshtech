@@ -33,6 +33,21 @@ namespace MeshTech.Model.Tests
             Assert.AreEqual(expectedOctRoute, actualOctRoute);
         }
 
+        [DataTestMethod]
+        [DataRow("FFCB18FAC688", "FFCB18FAC688", true)]
+        [DataRow("2FFFFFFFFFF8", "2FFFFFFFFFF8", true)]
+        [DataRow("FFFFFFFFFFF8", "1FFFFFFFFFF8", false)]
+        [DataRow("447FFFFFFFF8", "3FFFFFFFFFF8", false)]
+        public void EqualsTest(string firstHexRoute, string secondHexRoute, bool expectedResult)
+        {
+            var oneRoute = CreateRoute(firstHexRoute);
+            var secondRoute = CreateRoute(secondHexRoute);
+
+            var actualResult = oneRoute.Equals(secondRoute);
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
         private static OctRoute CreateRoute(string hexRoute)
         {
             var result = OctRoute.Parse(hexRoute);

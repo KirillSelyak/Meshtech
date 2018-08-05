@@ -68,6 +68,32 @@ namespace MeshTech.Model
             }
         }
 
+        public override int GetHashCode()
+        {
+            const int octCapacity = 8;
+            int result = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                result = result * octCapacity + values[i];
+            }
+            return result;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var route = obj as OctRoute;
+            if (route == null)
+                return false;
+            if (ReferenceEquals(this, route))
+                return true;
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] != route.values[i])
+                    return false;
+            }
+            return true;
+        }
+
         public override string ToString()
         {
             var builder = new StringBuilder();
