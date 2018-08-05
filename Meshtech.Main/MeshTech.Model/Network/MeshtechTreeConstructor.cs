@@ -6,7 +6,6 @@ namespace MeshTech.Model.Network
 {
     public class MeshtechTreeConstructor
     {
-
         public RouteNode Construct(StreamebleBeacons streamebleBeacons)
         {
             if (streamebleBeacons == null)
@@ -19,7 +18,7 @@ namespace MeshTech.Model.Network
                 for (int i = beacon.Route.Length - 1; i >= 0; i--)
                 {
                     var shift = beacon.Route[i];
-                    if (shift != 7)
+                    if (shift != OctRoute.MaxCellValue)
                     {
                         for (int j = 0; j <= i; j++)
                         {

@@ -13,6 +13,8 @@ namespace MeshTech.Model
 
         }
 
+        public const int MaxCellValue = 7;
+
         public static OctRoute Parse(string hexRoute)
         {
             var route = long.Parse(hexRoute, NumberStyles.HexNumber);
