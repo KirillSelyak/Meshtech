@@ -6,19 +6,21 @@ namespace MeshTech.Model.Network
 {
     public class MeshtechTreeConstructor
     {
+        private const int IgnoreLatestCellCount = 1;
+
         public RouteNode Construct(IEnumerable<Beacon> beacons)
         {
             if (beacons == null)
                 throw new ArgumentNullException(nameof(beacons));
 
-            var result = CreateRoot();
+            var result = CreateRoot("DC73267C3630");
             foreach (var beacon in beacons.Where(o => !string.IsNullOrEmpty(o.MacAddress)))
             {
                 var currentNode = result;
-                for (int i = beacon.Route.Length - 1; i >= 0; i--)
+                for (int i = beacon.Route.Length - 1 - IgnoreLatestCellCount; i >= 0; i--)
                 {
-                    var shift = beacon.Route[i];
-                    if (shift != OctRoute.MaxCellValue)
+                    var cellValue = beacon.Route[i];
+                    if (cellValue != OctRoute.MaxCellValue)
                     {
                         for (int j = 0; j <= i; j++)
                         {
@@ -37,11 +39,12 @@ namespace MeshTech.Model.Network
             return result;
         }
 
-        private static RouteNode CreateRoot()
+        private static RouteNode CreateRoot(string gateWay)
         {
             var beacond = new Beacon
             {
-                Route = OctRoute.Parse("FFFFFFFFFFF8")
+                Route = OctRoute.Parse("FFFFFFFFFFF8"),
+                MacAddress = gateWay
             };
             var result = new RouteNode(beacond);
             return result;

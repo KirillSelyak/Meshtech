@@ -44,6 +44,7 @@
     <Compile Include="IO\StreamableBeaconsEnumerator.cs" />
     <Compile Include="IO\StreamebleBeacons.cs" />
     <Compile Include="Network\MeshtechTreeConstructor.cs" />
+    <Compile Include="Network\RouteNodeEnumerator.cs" />
     <Compile Include="Text\BeaconParser.cs" />
     <Compile Include="IO\BeaconEnumeratorFactory.cs" />
     <Compile Include="Text\IBeaconParser.cs" />
@@ -51,7 +52,7 @@
     <Compile Include="IO\IStreamReaderFactory.cs" />
     <Compile Include="OctRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RouteBuilder.cs" />
+    <Compile Include="Network\RouteNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

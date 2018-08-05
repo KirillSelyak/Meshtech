@@ -1,6 +1,7 @@
 ﻿using System;
 using MeshTech.Model;
 using MeshTech.Model.IO;
+using MeshTech.Model.Network;
 
 namespace Meshtech.Main
 {
@@ -13,9 +14,9 @@ namespace Meshtech.Main
                 PrintInformationHeaderForTree(fileName);
 
                 var fileStreamReader = CreateFileStreamReaderFactory(fileName);
-                var streamebleBeacons = BootStrapper.CreateStreamebleBeacons(fileStreamReader);
+                var beacons = BootStrapper.CreateEnumerableBeacons(fileStreamReader);
                 var treeConstructor = BootStrapper.CreateTreeConstructor();
-                var tree = treeConstructor.Construct(streamebleBeacons);
+                var tree = treeConstructor.Construct(beacons);
                 PrintTree(tree);
             }
 
@@ -43,14 +44,10 @@ namespace Meshtech.Main
 
         private static void PrintTree(RouteNode root)
         {
-            Console.WriteLine($"{root.Beacon.Route.StringOctMask} - {root.Beacon.MacAddress}");
-            for (int i = 0; i < root.ChildRouteNodes.Length - 1; i++)
+            Console.WriteLine($"{root.Beacon.Route} - {root.Beacon.MacAddress}");
+            foreach (var currentNode in root)
             {
-                var targetNode = root.ChildRouteNodes[i];
-                if (root.ChildRouteNodes[i] != null)
-                {
-                    PrintTree(targetNode);
-                }
+                PrintTree(currentNode);
             }
         }
 
