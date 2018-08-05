@@ -42,7 +42,7 @@ namespace Meshtech.Main
             return result;
         }
 
-        private static void PrintTree(RouteNode root)
+        private static void PrintTree(TreeNode root)
         {
             Console.WriteLine($"{root.Beacon.Route} - {root.Beacon.MacAddress}");
             foreach (var currentNode in root)

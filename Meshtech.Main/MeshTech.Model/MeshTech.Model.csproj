@@ -52,7 +52,7 @@
     <Compile Include="IO\IStreamReaderFactory.cs" />
     <Compile Include="OctRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Network\RouteNode.cs" />
+    <Compile Include="Network\TreeNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

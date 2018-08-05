@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace MeshTech.Model.Network
 {
-    public class RouteNode : IEnumerable<RouteNode>
+    public class TreeNode : IEnumerable<TreeNode>
     {
         private Beacon beacon;
-        private RouteNode[] childRouteNodes = new RouteNode[8];
+        private TreeNode[] _childTreeNodes = new TreeNode[8];
 
-        public RouteNode(Beacon beacon)
+        public TreeNode(Beacon beacon)
         {
             this.beacon = beacon;
         }
@@ -21,19 +21,19 @@ namespace MeshTech.Model.Network
             }
         }
 
-        public RouteNode this[int index]
+        public TreeNode this[int index]
         {
             get
             {
-                var result = childRouteNodes[index];
+                var result = _childTreeNodes[index];
                 return result;
             }
-            set { childRouteNodes[index] = value; }
+            set { _childTreeNodes[index] = value; }
         }
 
-        public IEnumerator<RouteNode> GetEnumerator()
+        public IEnumerator<TreeNode> GetEnumerator()
         {
-            var originalEnumerator = ((IEnumerable<RouteNode>)childRouteNodes).GetEnumerator();
+            var originalEnumerator = ((IEnumerable<TreeNode>)_childTreeNodes).GetEnumerator();
             var result = new RouteNodeEnumerator(originalEnumerator);
             return result;
         }
