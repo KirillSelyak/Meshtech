@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 namespace MeshTech.Model.Network
@@ -20,18 +19,6 @@ namespace MeshTech.Model.Network
             {
                 return beacon;
             }
-        }
-
-        [Obsolete]
-        public RouteNode AddOrUpdate(byte index, Beacon targetBeacon)
-        {
-            var childRoute = childRouteNodes[index];
-            if (childRoute == null)
-            {
-                childRoute = new RouteNode(targetBeacon);
-                childRouteNodes[index] = childRoute;
-            }
-            return childRoute;
         }
 
         public RouteNode this[int index]
