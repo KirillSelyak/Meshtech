@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using MeshTech.Model.IO;
 
 namespace MeshTech.Model.Network
 {
     public class MeshtechTreeConstructor
     {
-        public RouteNode Construct(StreamebleBeacons streamebleBeacons)
+        public RouteNode Construct(IEnumerable<Beacon> beacons)
         {
-            if (streamebleBeacons == null)
-                throw new ArgumentNullException(nameof(streamebleBeacons));
+            if (beacons == null)
+                throw new ArgumentNullException(nameof(beacons));
 
             var result = CreateRoot();
-            foreach (var beacon in streamebleBeacons.Where(o => !string.IsNullOrEmpty(o.MacAddress)))
+            foreach (var beacon in beacons.Where(o => !string.IsNullOrEmpty(o.MacAddress)))
             {
                 var currentNode = result;
                 for (int i = beacon.Route.Length - 1; i >= 0; i--)

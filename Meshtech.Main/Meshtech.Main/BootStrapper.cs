@@ -1,4 +1,6 @@
-﻿using MeshTech.Model.IO;
+﻿using System.Collections.Generic;
+using MeshTech.Model;
+using MeshTech.Model.IO;
 using MeshTech.Model.Network;
 using MeshTech.Model.Text;
 
@@ -12,7 +14,7 @@ namespace Meshtech.Main
             return result;
         }
 
-        public static StreamebleBeacons CreateStreamebleBeacons(IStreamReaderFactory streamReaderFactory)
+        public static IEnumerable<Beacon> CreateEnumerableBeacons(IStreamReaderFactory streamReaderFactory)
         {
             var beaconParser = new BeaconParser();
             var beaconEnumeratorFactory = new BeaconEnumeratorFactory(beaconParser);
