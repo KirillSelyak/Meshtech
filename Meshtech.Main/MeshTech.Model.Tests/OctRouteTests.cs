@@ -12,11 +12,11 @@ namespace MeshTech.Model.Tests
         [DataRow("29CBB8FAC688", 7, 0)]
         [DataRow("29CBB8FAC688", 11, 4)]
         [DataRow("29CBB8FAC688", 15, 0)]
-        public void GivenParse_TheGetValue_ReturnsRelevantValue(string hexRoute, int index, int expectedResult)
+        public void ParseTest(string hexRoute, int index, int expectedResult)
         {
             var route = CreateRoute(hexRoute);
 
-            var actualResult = route.GetValue(index);
+            var actualResult = route[index];
 
             Assert.AreEqual(expectedResult, actualResult);
         }

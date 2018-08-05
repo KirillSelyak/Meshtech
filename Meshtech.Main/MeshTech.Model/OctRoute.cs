@@ -30,10 +30,18 @@ namespace MeshTech.Model
             return result;
         }
 
-        public byte GetValue(int index)
+        public byte this[int index]    
         {
-            var result = values[index];
-            return result;
+            get
+            {
+                var result = values[index];
+                return result;
+            }
+        }
+
+        public int Length
+        {
+            get { return values.Length; }
         }
 
         public OctRoute Insert(int index, byte value)
