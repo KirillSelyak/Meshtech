@@ -53,6 +53,8 @@
     <Compile Include="OctRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\TreeNode.cs" />
+    <Compile Include="Text\Pair.cs" />
+    <Compile Include="Text\PairParser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

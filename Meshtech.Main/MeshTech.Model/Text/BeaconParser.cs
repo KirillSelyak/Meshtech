@@ -7,6 +7,7 @@ namespace MeshTech.Model.Text
         private const int routeIndex = 5;
         private const int macAddressIndex = 6;
         private const int gatewayIndex = 4;
+        private readonly PairParser pairParser = new PairParser(':');
 
         public Beacon Parse(string line)
         {
@@ -15,18 +16,20 @@ namespace MeshTech.Model.Text
                 var result = new Beacon();
                 var information = line.Split('|');
 
-                var rawRoute = information[routeIndex];
-                result.Route = ParseRoute(rawRoute);
+                var routePair = ParsePair(information, routeIndex);
+                result.Route = OctRoute.Parse(routePair.Value);
 
-                if (information.Length > macAddressIndex)
-                {
-                    var rawMacAddress = information[macAddressIndex];
-                    result.MacAddress = ParseMacAddess(rawMacAddress);
-                }
+                var macAddressPair = ParsePair(information, macAddressIndex);
+                if (macAddressPair.Key == "BM")
+                    result.MacAddress = macAddressPair.Value;
 
-                var rawGateway = information[gatewayIndex];
-                result.Gateway = ParseGateway(rawGateway);
+                var gatewayPair = ParsePair(information, gatewayIndex);
+                result.Gateway = gatewayPair.Value;
                 return result;
+            }
+            catch (InvalidOperationException)
+            {
+                return Beacon.InvalidBeacon;
             }
             catch (IndexOutOfRangeException)
             {
@@ -34,27 +37,10 @@ namespace MeshTech.Model.Text
             }
         }
 
-        private OctRoute ParseRoute(string rawRoute)
+        private Pair ParsePair(string[] source, int index)
         {
-            var number = rawRoute.Substring(3);
-            var route = OctRoute.Parse(number);
-            return route;
-        }
-
-        private string ParseMacAddess(string rawMacAddress)
-        {
-            var result = string.Empty;
-            const string prefix = "BM:";
-            if (rawMacAddress.StartsWith(prefix))
-            {
-                result = rawMacAddress.Substring(prefix.Length);
-            }
-            return result;
-        }
-
-        private string ParseGateway(string rawGateway)
-        {
-            var result = rawGateway.Substring(3);
+            var item = source[index];
+            var result = pairParser.Parse(item);
             return result;
         }
 
