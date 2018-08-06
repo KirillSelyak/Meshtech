@@ -10,7 +10,7 @@ namespace Meshtech.Main
         {
             foreach (var fileName in args)
             {
-                PrintInformationHeaderForTree(fileName);
+                PrintHeader(fileName);
 
                 var fileStreamReader = CreateFileStreamReaderFactory(fileName);
                 var beacons = BootStrapper.CreateEnumerableBeacons(fileStreamReader);
@@ -22,17 +22,17 @@ namespace Meshtech.Main
                 }
             }
 
-            PrintInformationFooter();
+            PrintFooter();
         }
 
-        private static void PrintInformationFooter()
+        private static void PrintFooter()
         {
             Console.WriteLine();
             Console.WriteLine("Press any key to exit ...");
             Console.ReadLine();
         }
 
-        private static void PrintInformationHeaderForTree(string fileName)
+        private static void PrintHeader(string fileName)
         {
             Console.WriteLine();
             Console.WriteLine($"Network(s) from log file -'{fileName}':");

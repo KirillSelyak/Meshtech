@@ -16,9 +16,11 @@ namespace MeshTech.Model.Text
             var items = input.Split(delimeter);
             if (items.Length != 2)
                 throw new InvalidOperationException($"input {input} is not pair splitted by - {delimeter}.");
-            var result = new Pair();
-            result.Key = items[0];
-            result.Value = items[1];
+            var result = new Pair
+            {
+                Key = items[0],
+                Value = items[1]
+            };
             return result;
         }
 
