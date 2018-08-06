@@ -7,6 +7,8 @@ namespace MeshTech.Model
     public class OctRoute
     {
         private readonly byte[] values = new byte[16];
+        private const int OctCapacity = 8;
+        private const int MacAddressCapacity = 12;
 
         private OctRoute()
         {
@@ -23,9 +25,9 @@ namespace MeshTech.Model
             int index = result.values.Length;
             do
             {
-                result.values[index - 1] = Convert.ToByte(route % 8);
+                result.values[index - 1] = Convert.ToByte(route % OctCapacity);
                 index--;
-                route = route / 8;
+                route = route / OctCapacity;
             }
             while (route > 0);
 
@@ -63,19 +65,16 @@ namespace MeshTech.Model
             return result;
         }
 
-        public string StringMask
+        public string ToHexString()
         {
-            get
+            var stringValue = ToString();
+            var longValue = Convert.ToInt64(stringValue, OctCapacity);
+            var result = longValue.ToString("X");
+            while (result.Length < MacAddressCapacity )
             {
-                var builder = new StringBuilder();
-                for (int i = 0; i <= values.Length - 1; i++)
-                {
-                    builder.Append(values[i]);
-                }
-                var longValue = Convert.ToInt64(builder.ToString(), 8);
-                var result = longValue.ToString("X");
-                return result;
+                result = "0" + result;
             }
+            return result;
         }
 
         public override int GetHashCode()

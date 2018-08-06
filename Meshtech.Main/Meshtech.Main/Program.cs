@@ -34,8 +34,8 @@ namespace Meshtech.Main
 
         private static void PrintInformationHeaderForTree(string fileName)
         {
-            Console.WriteLine($"Tree from log file -'{fileName}':");
             Console.WriteLine();
+            Console.WriteLine($"Network(s) from log file -'{fileName}':");
         }
 
         private static IStreamReaderFactory CreateFileStreamReaderFactory(string path)
@@ -46,7 +46,7 @@ namespace Meshtech.Main
 
         private static void PrintTree(TreeNode root)
         {
-            Console.WriteLine($"{root.Beacon.Route} - {root.Beacon.MacAddress}");
+            Console.WriteLine($"{root.Beacon.Route.ToHexString()} - {root.Beacon.MacAddress}");
             foreach (var currentNode in root)
             {
                 PrintTree(currentNode);
