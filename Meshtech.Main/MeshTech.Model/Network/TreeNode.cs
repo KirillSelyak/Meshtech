@@ -34,7 +34,7 @@ namespace MeshTech.Model.Network
         public IEnumerator<TreeNode> GetEnumerator()
         {
             var originalEnumerator = ((IEnumerable<TreeNode>)_childTreeNodes).GetEnumerator();
-            var result = new RouteNodeEnumerator(originalEnumerator);
+            var result = new AliveTreeNodeEnumerator(originalEnumerator);
             return result;
         }
 

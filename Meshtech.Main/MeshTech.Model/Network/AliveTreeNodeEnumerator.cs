@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace MeshTech.Model.Network
 {
-    public class RouteNodeEnumerator : IEnumerator<TreeNode>
+    public class AliveTreeNodeEnumerator : IEnumerator<TreeNode>
     {
         private readonly IEnumerator<TreeNode> source;
 
-        public RouteNodeEnumerator(IEnumerator<TreeNode> source)
+        public AliveTreeNodeEnumerator(IEnumerator<TreeNode> source)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

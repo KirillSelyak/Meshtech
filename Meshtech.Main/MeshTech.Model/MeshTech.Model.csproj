@@ -44,7 +44,7 @@
     <Compile Include="IO\StreamableBeaconsEnumerator.cs" />
     <Compile Include="IO\StreamebleBeacons.cs" />
     <Compile Include="Network\MeshtechTreeConstructor.cs" />
-    <Compile Include="Network\RouteNodeEnumerator.cs" />
+    <Compile Include="Network\AliveTreeNodeEnumerator.cs" />
     <Compile Include="Text\BeaconParser.cs" />
     <Compile Include="IO\BeaconEnumeratorFactory.cs" />
     <Compile Include="Text\IBeaconParser.cs" />
