@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MeshTech.Model.Network
 {
@@ -8,15 +7,17 @@ namespace MeshTech.Model.Network
     {
         private const int IgnoreLastCellCount = 1;
 
-        public TreeNode Construct(IEnumerable<Beacon> beacons)
+        public IEnumerable<TreeNode> Construct(IEnumerable<Beacon> beacons)
         {
             if (beacons == null)
                 throw new ArgumentNullException(nameof(beacons));
 
-            var result = CreateRoot("DC73267C3630");
-            foreach (var currentBeacon in beacons.Where(o => !string.IsNullOrEmpty(o.MacAddress)))
+            var networks = new Dictionary<string, TreeNode>();
+            foreach (var currentBeacon in beacons)
             {
-                var currentNode = result;
+                TreeNode currentNode = GetAndCreateRoot(networks, currentBeacon);
+                if (string.IsNullOrEmpty(currentBeacon.MacAddress))
+                    continue;
                 int? i = FindCellIndex(currentBeacon);
                 if (i.HasValue)
                 {
@@ -34,7 +35,7 @@ namespace MeshTech.Model.Network
                     currentNode.Beacon.MacAddress = currentBeacon.MacAddress;
                 }
             }
-            return result;
+            return networks.Values;
         }
 
         private static int? FindCellIndex(Beacon beacon)
@@ -49,14 +50,28 @@ namespace MeshTech.Model.Network
             return null;
         }
 
-        private static TreeNode CreateRoot(string gateWay)
+        private static TreeNode CreateRoot(string gateway)
         {
             var beacond = new Beacon
             {
                 Route = OctRoute.Parse("FFFFFFFFFFF8"),
-                MacAddress = gateWay
+                MacAddress = gateway,
+                Gateway = gateway
+
             };
             var result = new TreeNode(beacond);
+            return result;
+        }
+
+        private static TreeNode GetAndCreateRoot(Dictionary<string, TreeNode> networks, Beacon beacon)
+        {
+            networks.TryGetValue(beacon.Gateway, out var result);
+            if (result == null)
+            {
+                result = CreateRoot(beacon.Gateway);
+                networks.Add(beacon.Gateway, result);
+            }
+
             return result;
         }
     }

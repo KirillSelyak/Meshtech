@@ -16,8 +16,11 @@ namespace Meshtech.Main
                 var fileStreamReader = CreateFileStreamReaderFactory(fileName);
                 var beacons = BootStrapper.CreateEnumerableBeacons(fileStreamReader);
                 var treeConstructor = BootStrapper.CreateTreeConstructor();
-                var tree = treeConstructor.Construct(beacons);
-                PrintTree(tree);
+                var trees = treeConstructor.Construct(beacons);
+                foreach (var tree in trees)
+                {
+                    PrintTree(tree);
+                }
             }
 
             PrintInformationFooter();
