@@ -6,6 +6,7 @@ namespace MeshTech.Model.Text
     {
         private const int routeIndex = 5;
         private const int macAddressIndex = 6;
+        private const int gatewayIndex = 4;
 
         public Beacon Parse(string line)
         {
@@ -22,6 +23,9 @@ namespace MeshTech.Model.Text
                     var rawMacAddress = information[macAddressIndex];
                     result.MacAddress = ParseMacAddess(rawMacAddress);
                 }
+
+                var rawGateway = information[gatewayIndex];
+                result.Gateway = ParseGateway(rawGateway);
                 return result;
             }
             catch (IndexOutOfRangeException)
@@ -40,11 +44,19 @@ namespace MeshTech.Model.Text
         private string ParseMacAddess(string rawMacAddress)
         {
             var result = string.Empty;
-            if (rawMacAddress.StartsWith("BM:"))
+            const string prefix = "BM:";
+            if (rawMacAddress.StartsWith(prefix))
             {
-                result = rawMacAddress.Substring(3);
+                result = rawMacAddress.Substring(prefix.Length);
             }
             return result;
         }
+
+        private string ParseGateway(string rawGateway)
+        {
+            var result = rawGateway.Substring(3);
+            return result;
+        }
+
     }
 }

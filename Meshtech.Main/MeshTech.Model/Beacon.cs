@@ -4,6 +4,7 @@
     {
         private static Beacon invalidBeacon = new Beacon();
         private string macAddress = string.Empty;
+        private string gateway = string.Empty;
 
         public static Beacon InvalidBeacon
         {
@@ -21,9 +22,15 @@
             set { macAddress = value ?? string.Empty; }
         }
 
+        public string Gateway
+        {
+            get { return gateway; }
+            set { gateway = value ?? string.Empty; }
+        }
+
         public override string ToString()
         {
-            var result = $"Route:{Route}, MacAddress {MacAddress}";
+            var result = $"Route:{Route}, MacAddress: {MacAddress}, Gateway: {Gateway}.";
             return result;
         }
 
@@ -35,7 +42,7 @@
             if (ReferenceEquals(this, beacon))
                 return true;
 
-            return Route.Equals(beacon.Route) && MacAddress.Equals(beacon.MacAddress);
+            return Route.Equals(beacon.Route) && MacAddress.Equals(beacon.MacAddress) && Gateway.Equals(beacon.Gateway);
         }
 
         public override int GetHashCode()
