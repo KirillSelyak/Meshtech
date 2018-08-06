@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MeshTech.Model.Network
 {
@@ -13,7 +14,7 @@ namespace MeshTech.Model.Network
                 throw new ArgumentNullException(nameof(beacons));
 
             var networks = new Dictionary<string, TreeNode>();
-            foreach (var currentBeacon in beacons)
+            foreach (var currentBeacon in beacons.Where(b => !b.Equals(Beacon.InvalidBeacon)))
             {
                 TreeNode network = GetOrCreateRoot(networks, currentBeacon.Gateway);
                 if (string.IsNullOrEmpty(currentBeacon.MacAddress))
