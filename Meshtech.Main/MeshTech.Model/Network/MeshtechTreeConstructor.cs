@@ -15,30 +15,38 @@ namespace MeshTech.Model.Network
             var networks = new Dictionary<string, TreeNode>();
             foreach (var currentBeacon in beacons)
             {
-                TreeNode currentNode = GetAndCreateRoot(networks, currentBeacon);
+                TreeNode network = GetOrCreateRoot(networks, currentBeacon.Gateway);
                 if (string.IsNullOrEmpty(currentBeacon.MacAddress))
                     continue;
-                int? i = FindCellIndex(currentBeacon);
-                if (i.HasValue)
+
+                int? deepestIndex = FindDeepestIndex(currentBeacon);
+                if (deepestIndex.HasValue)
                 {
-                    for (int j = 0; j <= i; j++)
-                    {
-                        var nodeIndex = currentBeacon.Route[j];
-                        if (currentNode[nodeIndex] == null)
-                        {
-                            var newBeacon = new Beacon();
-                            newBeacon.Route = currentNode.Beacon.Route.Insert(j, nodeIndex);
-                            currentNode[nodeIndex] = new TreeNode(newBeacon);
-                        }
-                        currentNode = currentNode[nodeIndex];
-                    }
-                    currentNode.Beacon.MacAddress = currentBeacon.MacAddress;
+                    AddNodes(network, currentBeacon, deepestIndex.Value);
                 }
             }
             return networks.Values;
         }
 
-        private static int? FindCellIndex(Beacon beacon)
+        private void AddNodes(TreeNode gateway, Beacon beacon, int deepestIndex)
+        {
+            var currentNode = gateway;
+            for (int j = 0; j <= deepestIndex; j++)
+            {
+                var nodeIndex = beacon.Route[j];
+                if (currentNode[nodeIndex] == null)
+                {
+                    var newBeacon = new Beacon();
+                    newBeacon.Route = currentNode.Beacon.Route.Insert(j, nodeIndex);
+                    newBeacon.Gateway = currentNode.Beacon.Gateway;
+                    currentNode[nodeIndex] = new TreeNode(newBeacon);
+                }
+                currentNode = currentNode[nodeIndex];
+            }
+            currentNode.Beacon.MacAddress = beacon.MacAddress;
+        }
+
+        private static int? FindDeepestIndex(Beacon beacon)
         {
             for (int i = beacon.Route.Length - 1 - IgnoreLastCellCount; i >= 0; i--)
             {
@@ -63,15 +71,14 @@ namespace MeshTech.Model.Network
             return result;
         }
 
-        private static TreeNode GetAndCreateRoot(Dictionary<string, TreeNode> networks, Beacon beacon)
+        private static TreeNode GetOrCreateRoot(Dictionary<string, TreeNode> networks, string gateway)
         {
-            networks.TryGetValue(beacon.Gateway, out var result);
+            networks.TryGetValue(gateway, out var result);
             if (result == null)
             {
-                result = CreateRoot(beacon.Gateway);
-                networks.Add(beacon.Gateway, result);
+                result = CreateRoot(gateway);
+                networks.Add(gateway, result);
             }
-
             return result;
         }
     }

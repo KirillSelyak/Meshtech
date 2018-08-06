@@ -1,5 +1,4 @@
 ﻿using System;
-using MeshTech.Model;
 using MeshTech.Model.IO;
 using MeshTech.Model.Network;
 
