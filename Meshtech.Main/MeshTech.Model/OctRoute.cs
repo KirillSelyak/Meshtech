@@ -7,8 +7,8 @@ namespace MeshTech.Model
     public class OctRoute
     {
         private readonly byte[] values = new byte[16];
-        private const int OctCapacity = 8;
-        private const int MacAddressCapacity = 12;
+        public const int OctCapacity = 8;
+        public const int MacAddressCapacity = 12;
 
         private OctRoute()
         {

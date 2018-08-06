@@ -6,7 +6,7 @@ namespace MeshTech.Model.Network
     public class TreeNode : IEnumerable<TreeNode>
     {
         private Beacon beacon;
-        private TreeNode[] _childTreeNodes = new TreeNode[8];
+        private TreeNode[] childTreeNodes = new TreeNode[OctRoute.OctCapacity];
 
         public TreeNode(Beacon beacon)
         {
@@ -25,15 +25,15 @@ namespace MeshTech.Model.Network
         {
             get
             {
-                var result = _childTreeNodes[index];
+                var result = childTreeNodes[index];
                 return result;
             }
-            set { _childTreeNodes[index] = value; }
+            set { childTreeNodes[index] = value; }
         }
 
         public IEnumerator<TreeNode> GetEnumerator()
         {
-            var originalEnumerator = ((IEnumerable<TreeNode>)_childTreeNodes).GetEnumerator();
+            var originalEnumerator = ((IEnumerable<TreeNode>)childTreeNodes).GetEnumerator();
             var result = new AliveTreeNodeEnumerator(originalEnumerator);
             return result;
         }
